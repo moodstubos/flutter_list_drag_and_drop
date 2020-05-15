@@ -41,12 +41,15 @@ class DragAndDropList<T> extends StatefulWidget {
   // Otherwise, draggable items provide their own draggable implementation.
   final double tilt;
 
+  final EdgeInsetsGeometry padding;
+  
   DragAndDropList(this.rowsData,
       {Key key, @required this.itemBuilder,
         this.onDragFinish,
         @required this.canBeDraggedTo,
         this.dragElevation = 0.0,
-        this.tilt = 0.0})
+        this.tilt = 0.0,
+        this.padding})
       : providesOwnDraggable = false,
         itemBuilderCustom = null, super(key: key);
 
@@ -55,7 +58,8 @@ class DragAndDropList<T> extends StatefulWidget {
         this.onDragFinish,
         @required this.canBeDraggedTo,
         this.dragElevation = 0.0,
-        this.tilt = 0.0})
+        this.tilt = 0.0,
+        this.padding})
       : providesOwnDraggable = true,
         itemBuilder = null, super(key: key);
 
@@ -155,6 +159,7 @@ class _DragAndDropListState<T> extends State<DragAndDropList<T>> {
     return new LayoutBuilder(
       builder: (BuildContext context3, constr) {
         return new ListView.builder(
+          padding: widget.padding,
           itemBuilder: (BuildContext context2, int index) {
             return _getDraggableListItem(context2, index, context3);
           },
